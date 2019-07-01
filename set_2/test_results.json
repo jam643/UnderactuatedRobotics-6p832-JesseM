@@ -1,0 +1,27 @@
+{
+    "execution_time": "0.00", 
+    "tests": [
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 1_1"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 1_2"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1 Optimal Control Input"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1 Time (Cost) To Go"
+        }
+    ], 
+    "score": 8, 
+    "leaderboard": []
+}
