@@ -7,6 +7,7 @@ import math
 import numpy as np
 from gradescope_utils.autograder_utils.decorators import weight
 from gradescope_utils.autograder_utils.json_test_runner import JSONTestRunner
+from pydrake.all import MathematicalProgram, Solve, Variables, Polynomial
 
 from pydrake.all import Variable
 import pydrake.symbolic as dsym

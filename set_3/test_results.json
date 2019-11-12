@@ -1,0 +1,4 @@
+{
+    "output": "Unknown exception while setting up: Traceback (most recent call last):\n  File \"test_set_3.py\", line 458, in run_tests\n    lambda: imp.load_source('set_3_for_testing', '/tmp/set_3_for_testing.py'))()\nIndexError: tuple index out of range\n",
+    "score": 0.0
+}
