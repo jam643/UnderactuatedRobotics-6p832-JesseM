@@ -73,7 +73,6 @@ class InertialWheelPendulum(VectorSystem):
 
         # Awkward slice required on tauG to get shapes to agree --
         # numpy likes to collapse the other dot products in this expression
-        # to vectors.
         qdd = np.dot(np.linalg.inv(M), (tauG[:, 0] + np.dot(B, u) - np.dot(C, qd)))
 
         return np.hstack([qd, qdd])

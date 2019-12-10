@@ -1,0 +1,282 @@
+<?xml version='1.0'?>
+<!-- 
+This model describes a mechanism to be attached to the "world" (at the base),
+with six degrees of freedom: three translational and three rotational. Each
+degree of freedom is realized through a single degree of freedom joint- revolute
+or prismatic- connecting two low-mass (1e-4 kg) links. 
+-->
+
+<sdf version='1.6'>
+  <model name='RaibertHopper2D'>
+    <link name='ground'>
+      <pose frame=''>0 0 -0.01 0 0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>10000</mass>
+        <inertia>
+          <ixx>10000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>10000</iyy>
+          <iyz>0</iyz>
+          <izz>10000</izz>
+        </inertia>
+      </inertial>
+      <collision name='ground_collision'>
+        <pose frame=''>0 0 -0.01 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>100.0 100.0 0.02</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='ground_visual'>
+        <pose frame=''>0 0 -0.01 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>100.0 100.0 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.54 0.54 0.54 0.9</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <link name='body_pre_z'/>
+    <link name='body_pre_theta'/>
+
+
+    <link name='body'>
+      <pose frame=''>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+      <visual name='body_visual_nx'>
+        <pose frame=''>-1.5 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 3.0 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.9</diffuse>
+        </material>
+      </visual>
+      <visual name='body_visual_px'>
+        <pose frame=''>1.5 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 3.0 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.9</diffuse>
+        </material>
+      </visual>
+      <visual name='body_visual_ny'>
+        <pose frame=''>0 -1.5 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.9</diffuse>
+        </material>
+      </visual>
+      <visual name='body_visual_py'>
+        <pose frame=''>0 1.5 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 0.5</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.9</diffuse>
+        </material>
+      </visual>
+
+      <collision name='body_collision_nx'>
+        <pose frame=''>-1.5 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 3.0 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='body_collision_px'>
+        <pose frame=''>1.5 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 3.0 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      <!--
+        Unecessary as we're doing planar sim
+      <collision name='body_collision_ny'>
+        <pose frame=''>0 -1.5 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='body_collision_py'>
+        <pose frame=''>0 1.5 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>3.0 0.1 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      -->
+    </link>
+
+    <joint name='body_x' type='prismatic'>
+      <child>body_pre_z</child>
+      <parent>ground</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <joint name='body_z' type='prismatic'>
+      <child>body_pre_theta</child>
+      <parent>body_pre_z</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <joint name='body_theta' type='revolute'>
+      <child>body</child>
+      <parent>body_pre_theta</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <link name='leg_thigh'>
+      <visual name='body_visual_ny'>
+        <pose frame=''>0 0.0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.75</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9 0.9 0.9 0.9</diffuse>
+        </material>
+      </visual>
+    </link>
+      
+    <joint name='thigh' type='revolute'>
+      <child>leg_thigh</child>
+      <parent>body</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <link name='foot'>
+      <pose frame=''>0 0 0.0 0 0 0</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.01</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.01</iyy>
+          <iyz>0</iyz>
+          <izz>0.01</izz>
+        </inertia>
+      </inertial>
+      <collision name='foot_collision'>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.05 2.0</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='foot_visual'>
+        <pose frame=''>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.05 2.0</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.9 0.9 0.9 0.9</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name='extension' type='prismatic'>
+      <child>foot</child>
+      <parent>leg_thigh</parent>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <upper>0.5</upper>
+          <stiffness>10000</stiffness>
+          <dissipation>1.0</dissipation>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+  </model>
+</sdf>

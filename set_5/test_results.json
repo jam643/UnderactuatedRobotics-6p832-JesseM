@@ -1,0 +1,49 @@
+{
+    "execution_time": "4.99", 
+    "tests": [
+        {
+            "output": "Test Failed: This means that one of simple force closure checks failed \n", 
+            "score": 0.0, 
+            "max_score": 5, 
+            "name": "Test force closure metric on some predefined grasps"
+        }, 
+        {
+            "output": "Test Failed: These many grasp points should achieve force closure since One of them was chosen to be directly antipoldal. \n", 
+            "score": 0.0, 
+            "max_score": 10, 
+            "name": "Test force closure metric on some random grasps"
+        }, 
+        {
+            "output": "Test Failed: The volume of two pointsshould be zero, with no error\n", 
+            "score": 0.0, 
+            "max_score": 5, 
+            "name": "Tests the convex hull volume is 0 for two points"
+        }, 
+        {
+            "output": "Test Failed: This test should have a tiny volumeit just has points: [array([-1.,  0.]), array([ 1.,  0.]), array([ 0.0001,  0.0001])]\n", 
+            "score": 0.0, 
+            "max_score": 5, 
+            "name": "Tests the convex hull volume is correctly computed on a small sample set"
+        }, 
+        {
+            "output": "After 100 attempts, couldn't find a good grasp for this object.\nProceeding with a horrible random guess.\nWarning: initial condition IK solve returned info  13\nWarning: target posture IK solve got info 13 when computing goal posture at least once during simulation. This means the grasp points was hard to achieve given the current object posture. This is occasionally OK, but indicates that your controller is probably struggling a little.\nt:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\nTest Failed: The final pose error was greater than 0.25 in at least one dimension: goal [1.500000,0.499724,0.499724], target [1.501943,-0.077643,0.040106].\n", 
+            "score": 0.0, 
+            "max_score": 10, 
+            "name": "Test two finger grip of the box under motion A."
+        }, 
+        {
+            "output": "After 100 attempts, couldn't find a good grasp for this object.\nProceeding with a horrible random guess.\nWarning: initial condition IK solve returned info  13\nWarning: target posture IK solve got info 13 when computing goal posture at least once during simulation. This means the grasp points was hard to achieve given the current object posture. This is occasionally OK, but indicates that your controller is probably struggling a little.\nt:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\nTest Failed: The final pose error was greater than 0.25 in at least one dimension: goal [1.000276,0.500000,0.000000], target [0.574054,-0.543817,-0.018212].\n", 
+            "score": 0.0, 
+            "max_score": 10, 
+            "name": "Test four finger grip of the large ball under motion C."
+        }, 
+        {
+            "output": "After 100 attempts, couldn't find a good grasp for this object.\nProceeding with a horrible random guess.\nWarning: initial condition IK solve returned info  13\nWarning: target posture IK solve got info 13 when computing goal posture at least once during simulation. This means the grasp points was hard to achieve given the current object posture. This is occasionally OK, but indicates that your controller is probably struggling a little.\nt:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\nTest Failed: The final pose error was greater than 0.25 in at least one dimension: goal [1.500000,-0.499724,0.499724], target [1.500000,0.000000,0.000000].\n", 
+            "score": 0.0, 
+            "max_score": 10, 
+            "name": "Test three finger grip of the triangle under motion B."
+        }
+    ], 
+    "score": 0.0, 
+    "leaderboard": []
+}

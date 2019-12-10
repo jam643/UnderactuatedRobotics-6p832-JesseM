@@ -1,4 +1,56 @@
 {
-    "output": "Unknown exception while setting up: Traceback (most recent call last):\n  File \"test_set_3.py\", line 458, in run_tests\n    lambda: imp.load_source('set_3_for_testing', '/tmp/set_3_for_testing.py'))()\nIndexError: tuple index out of range\n",
-    "score": 0.0
+    "execution_time": "4.23", 
+    "tests": [
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Problem 2_1: Finding Q"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1: Linearization, A matrix"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1: Linearization, B matrix"
+        }, 
+        {
+            "output": "[[ 1.  0.  1.  0.]\n [ 0.  1.  0.  1.]]\n[[ 1.  0.  0.  0.]\n [ 0.  1.  0.  0.]]\n[[ 0.  -0.1  0.  -0.5]\n [ 0.   1.1  0.   0.5]\n [-0.1  0.  -0.5  0. ]\n [ 1.1  0.   0.5  0. ]]\n[[ 0.  -0.1  0.   0.5]\n [ 0.   1.1  0.  -0.5]\n [-0.1  0.   0.5  0. ]\n [ 1.1  0.  -0.5  0. ]]\n[[ 0.  0.]\n [ 0.  0.]]\n[[ 1.  1.]\n [ 1.  1.]]\n[[ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]\n [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]\n [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]\n [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]\n [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]]\n", 
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3.2: Controllability"
+        }, 
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Problem 3.3: LQR"
+        }, 
+        {
+            "output": "Test Failed: x0 = [ 2.9  0.   0.   0. ] did not converge to the upright fixed point. Final state was instead [  1.429 -18.529  -2.86  -17.14 ]\n", 
+            "score": 0.0, 
+            "max_score": 2, 
+            "name": "Problem 3.4: LQR ROA, Prologue"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3.5: LQR ROA, Evaluating F, V, and Vdot"
+        }, 
+        {
+            "output": "Test Failed: Vdot sampled at x0=[ 9.804  4.342  5.446  0.754] was positive (Vdot = 160.52288344)\n", 
+            "score": 0.0, 
+            "max_score": 3, 
+            "name": "Problem 3.6: LQR ROA, Numerical estimate of the ROA"
+        }, 
+        {
+            "output": "Test Failed: x0 = [ 0.  0.  0.  0.] did not converge to the upright fixed point. Final state was instead [ 0.  0.  0.  0.]\n", 
+            "score": 0.0, 
+            "max_score": 4, 
+            "name": "Problem 3.8: Combined Swing-Up and Stabilization"
+        }
+    ], 
+    "score": 16.0, 
+    "leaderboard": []
 }

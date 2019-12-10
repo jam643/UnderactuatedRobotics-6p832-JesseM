@@ -1,0 +1,221 @@
+<?xml version='1.0'?>
+
+<sdf version='1.6'>
+  <model name='planar_finger'>
+    <link name='link_base'>
+      <visual name='palm_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.8 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.5 0.5 0.5 0.99</diffuse>
+        </material>
+      </visual>
+    </link>
+    <joint name='link_base_to_link_1' type='revolute'>
+      <child>link_1</child>
+      <parent>link_base</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <link name='link_1'>
+      <pose>0.0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.5 0 0 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+      <visual name='link_1_ball_visual_1'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.2</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_1_ball_visual_2'>
+        <pose>1.25 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.2</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_1_visual'>
+        <pose>0.625 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.25 0.4 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <link name='link_2'>
+      <pose>0.0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.5 0 0 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial>
+      <visual name='link_2_ball_visual_1'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.15</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.8 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_2_ball_visual_2'>
+        <pose>1.25 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.15</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.8 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_2_visual'>
+        <pose>0.625 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.25 0.3 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.8 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+    </link>
+
+    <link name='link_3'>
+      <pose>0.0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.5 0 0 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>1.0</izz>
+        </inertia>
+      </inertial> 
+      <visual name='link_3_ball_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.2</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_3_visual'>
+        <pose>0.5 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.0 0.4 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.64 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <visual name='link_3_tip_visual'>
+        <pose>1.0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.2</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <diffuse>0.8 0.12 0.15 0.99</diffuse>
+        </material>
+      </visual>
+      <collision name='link_3_tip_collision'>
+        <pose>1.0 0 0 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.2</radius>
+          </sphere>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name='link_1_to_link_2' type='revolute'>
+      <child>link_2</child>
+      <parent>link_1</parent>
+      <pose>1.25 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    
+    <joint name='link_2_to_link_3' type='revolute'>
+      <child>link_3</child>
+      <parent>link_2</parent>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    
+  </model>
+</sdf>

@@ -1,0 +1,99 @@
+<?xml version='1.0'?>
+
+<sdf version='1.6'>
+  <model name='manipuland'>
+    <link name='body_pre_x'/>
+    <link name='body_pre_y'/>
+    <link name='body_pre_theta'/>
+
+    <joint name='body_x' type='prismatic'>
+      <child>body_pre_y</child>
+      <parent>body_pre_x</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.3</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <joint name='body_y' type='prismatic'>
+      <child>body_pre_theta</child>
+      <parent>body_pre_y</parent>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.3</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <joint name='body_theta' type='revolute'>
+      <child>manipuland_body</child>
+      <parent>body_pre_theta</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>0.0</effort>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.3</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <link name='manipuland_body'>
+      <pose>0.0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.0 0 0 0 0 0</pose>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.1</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.1</iyy>
+          <iyz>0</iyz>
+          <izz>0.1</izz>
+        </inertia>
+      </inertial>
+      <visual name='manipuland_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>models/triangle.obj</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 0.843 0.0 0.75</diffuse>
+        </material>
+      </visual>
+      <collision name='manipuland_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>models/triangle.obj</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    
+  </model>
+</sdf>
