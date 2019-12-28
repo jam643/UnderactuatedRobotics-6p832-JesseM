@@ -1,5 +1,5 @@
 {
-    "execution_time": "4.23", 
+    "execution_time": "34.28", 
     "tests": [
         {
             "score": 4, 
@@ -28,8 +28,7 @@
             "name": "Problem 3.3: LQR"
         }, 
         {
-            "output": "Test Failed: x0 = [ 2.9  0.   0.   0. ] did not converge to the upright fixed point. Final state was instead [  1.429 -18.529  -2.86  -17.14 ]\n", 
-            "score": 0.0, 
+            "score": 2, 
             "max_score": 2, 
             "name": "Problem 3.4: LQR ROA, Prologue"
         }, 
@@ -39,18 +38,16 @@
             "name": "Problem 3.5: LQR ROA, Evaluating F, V, and Vdot"
         }, 
         {
-            "output": "Test Failed: Vdot sampled at x0=[ 9.804  4.342  5.446  0.754] was positive (Vdot = 160.52288344)\n", 
-            "score": 0.0, 
+            "score": 3, 
             "max_score": 3, 
             "name": "Problem 3.6: LQR ROA, Numerical estimate of the ROA"
         }, 
         {
-            "output": "Test Failed: x0 = [ 0.  0.  0.  0.] did not converge to the upright fixed point. Final state was instead [ 0.  0.  0.  0.]\n", 
-            "score": 0.0, 
+            "score": 4, 
             "max_score": 4, 
             "name": "Problem 3.8: Combined Swing-Up and Stabilization"
         }
     ], 
-    "score": 16.0, 
+    "score": 25, 
     "leaderboard": []
 }
