@@ -105,7 +105,7 @@ class TestSetFour_OrbitalTransfer(unittest.TestCase):
                 self.assertTrue(abs(((traj[j+1] - euler_integration)**2).sum()) < .001,
                     "The trajectory, input_trajectory, and time_array have been \
                     computed to not be consistent with out euler integration when testing \
-                    x0 = %s" % np.array_str(self.initial_states_for_testing[index]))
+                    x0 = {}, at stage = {}".format(np.array_str(self.initial_states_for_testing[index]),j))
 
     @weight(10)
     @timeout_decorator.timeout(2.0)

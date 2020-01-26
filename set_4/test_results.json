@@ -1,0 +1,67 @@
+{
+    "execution_time": "4.76", 
+    "tests": [
+        {
+            "output": "optimization successful:  True\ntotal num decision vars (x: (N+1)*4, u: 2N, total_time: 1): 305\nsolver used:  SNOPT\noptimal trajectory time: 15.00 sec\noptimization successful:  True\ntotal num decision vars (x: (N+1)*4, u: 2N, total_time: 1): 305\nsolver used:  SNOPT\noptimal trajectory time: 11.49 sec\noptimization successful:  True\ntotal num decision vars (x: (N+1)*4, u: 2N, total_time: 1): 305\nsolver used:  SNOPT\noptimal trajectory time: 10.87 sec\noptimization successful:  True\ntotal num decision vars (x: (N+1)*4, u: 2N, total_time: 1): 305\nsolver used:  SNOPT\noptimal trajectory time: 15.00 sec\n", 
+            "score": 1, 
+            "max_score": 1, 
+            "name": "Run a few trajectory optimizations once, and persist the output"
+        }, 
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Check that the system approximately obeys the original dynamics"
+        }, 
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Check that the trajectory was reasonably efficient with fuel use"
+        }, 
+        {
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Check that the initial state is valid"
+        }, 
+        {
+            "score": 1, 
+            "max_score": 1, 
+            "name": "Check that the original parameters have not been changed"
+        }, 
+        {
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Check that the trajectory satisfied the specified 'orbit' constraint"
+        }, 
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Check that the time_array is valid"
+        }, 
+        {
+            "output": "Test Failed: No module named planar_multibody_visualizer\n", 
+            "score": 0.0, 
+            "max_score": 10, 
+            "name": "Verify that the hopper keeps hopping for 10s"
+        }, 
+        {
+            "output": "Test Failed: No module named planar_multibody_visualizer\n", 
+            "score": 0.0, 
+            "max_score": 5, 
+            "name": "Verify that the hopper tracks a desired lateral velocity"
+        }, 
+        {
+            "output": "Test Failed: No module named planar_multibody_visualizer\n", 
+            "score": 0.0, 
+            "max_score": 5, 
+            "name": "Verify that the hopper stabilizes both hopping and theta"
+        }, 
+        {
+            "output": "Test Failed: No module named planar_multibody_visualizer\n", 
+            "score": 0.0, 
+            "max_score": 1, 
+            "name": "Verify the signature of ChooseThighTorque"
+        }
+    ], 
+    "score": 34.0, 
+    "leaderboard": []
+}

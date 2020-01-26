@@ -146,8 +146,8 @@ class OrbitalTransferRocket():
         '''
         rocket_position_x = trajectory[:,0]
         rocket_position_y = trajectory[:,1]
-        fig, axes = plt.subplots(nrows=1,ncols=1)
-        axes.plot(rocket_position_x, rocket_position_y)
+        fig, axes = plt.subplots(nrows=1,ncols=1,figsize = (16,9))
+        axes.plot(rocket_position_x, rocket_position_y,'.-')
         circ = Circle(self.world_1_position, radius=0.2, facecolor=self.world_1_color, edgecolor='black', fill=True ,linewidth = 1.0, linestyle='solid')
         axes.add_patch(circ)
         circ = Circle(self.world_2_position, radius=0.1, facecolor=self.world_2_color, edgecolor='black', fill=True ,linewidth = 1.0, linestyle='solid')
@@ -203,14 +203,70 @@ class OrbitalTransferRocket():
             time_array: an array with N rows. 
 
         '''
-    
-        print "Function not yet implemented"
 
+        # length of horizon (excluding init state)
         N = 50
         trajectory = np.zeros((N+1,4))
         input_trajectory = np.ones((N,2))*10.0
-        time_used = 100.0
-        time_array = np.arange(0.0, time_used, time_used/(N+1))
+        
+        ### My implementation of Direct Transcription 
+        # (states and control are all decision vars using Euler integration)
+        mp = MathematicalProgram()
+        
+        # let trajectory duration be a decision var
+        total_time = mp.NewContinuousVariables(1,"total_time")
+        dt = total_time[0]/N
+        
+        # create the control decision var (m*N) and state decision var (n*[N+1])
+        idx = 0
+        u_list = mp.NewContinuousVariables(2,"u_{}".format(idx))
+        state_list = mp.NewContinuousVariables(4,"state_{}".format(idx))
+        state_list = np.vstack((state_list, mp.NewContinuousVariables(4,"state_{}".format(idx+1))))
+        for idx in range(1, N):
+            u_list = np.vstack((u_list, mp.NewContinuousVariables(2,"u_{}".format(idx))))
+            state_list = np.vstack((state_list, mp.NewContinuousVariables(4,"state_{}".format(idx+1))))
+        
+        ### Constraints
+        # set init state as constraint on stage 0 decision vars
+        for state_idx in range(4):
+            mp.AddLinearConstraint(state_list[0,state_idx] == state_initial[state_idx])
+
+        # interstage equality constraint on state vars via Euler integration
+        # note: Direct Collocation could improve accuracy for same computation
+        for idx in range(1, N+1):
+            state_new = state_list[idx-1,:] + dt*self.rocket_dynamics(state_list[idx-1,:],u_list[idx-1,:])
+            for state_idx in range(4):
+                mp.AddConstraint(state_list[idx,state_idx] == state_new[state_idx])
+                
+        # constraint on time
+        mp.AddLinearConstraint(total_time[0] <= maximum_time)
+        mp.AddLinearConstraint(total_time[0] >= minimum_time)
+        
+        # constraint on final state distance (squared)to second planet
+        final_dist_to_world_2_sq = (self.world_2_position[0]-state_list[-1,0])**2 + (self.world_2_position[1]-state_list[-1,1])**2
+        mp.AddConstraint(final_dist_to_world_2_sq <= 0.25)
+        
+        # constraint on final state speed (squared
+        final_speed_sq = state_list[-1,2]**2 + state_list[-1,3]**2
+        mp.AddConstraint(final_speed_sq <= 1)
+        
+        ### Cost
+        # equal cost on vertical/horizontal accels, weight shouldn't matter since this is the only cost
+        mp.AddQuadraticCost(1 * u_list[:,0].dot(u_list[:,0]))
+        mp.AddQuadraticCost(1 * u_list[:,1].dot(u_list[:,1]))
+        
+        ### Solve and parse
+        result = Solve(mp)
+        trajectory = result.GetSolution(state_list)
+        input_trajectory = result.GetSolution(u_list)
+        tf = result.GetSolution(total_time)
+        time_array = np.linspace(0,tf[0],N+1)
+        
+        print "optimization successful: ", result.is_success()
+        print "total num decision vars (x: (N+1)*4, u: 2N, total_time: 1): {}".format(mp.num_vars())
+        print "solver used: ", result.get_solver_id().name()
+        print "optimal trajectory time: {:.2f} sec".format(tf[0])
+        
         return trajectory, input_trajectory, time_array
 
         
