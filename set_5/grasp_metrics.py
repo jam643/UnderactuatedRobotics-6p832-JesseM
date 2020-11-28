@@ -7,6 +7,8 @@ from matplotlib.patches import Circle
 from matplotlib.patches import Polygon
 import matplotlib.pyplot as plt
 
+from pydrake.all import MathematicalProgram, Solve
+
 
 def achieves_force_closure(points, normals, mu):
     """
@@ -42,8 +44,66 @@ def achieves_force_closure(points, normals, mu):
     assert mu >= 0.0
 
     ## YOUR CODE HERE
-    # print("Not yet implemeted!")
-    return False
+    G = get_G(points,normals)
+    if not is_full_row_rank(G):
+        print("G is not full row rank")
+        return False
+    
+    N_points = len(points)
+    max_force = 1000
+    mp = MathematicalProgram()
+    
+    
+    # force tangent to surface
+    forces_x = mp.NewContinuousVariables(N_points,"forces_x")
+    # force normal to surface
+    forces_z = mp.NewContinuousVariables(N_points,"forces_z")   
+#     forces = np.zeros((2*N_points,1))
+    forces = []
+    for point_idx in range(N_points):
+        forces = np.hstack((forces,[forces_x[point_idx],forces_z[point_idx]]))
+#         forces[2*point_idx] = forces_x[point_idx]
+#         forces[2*point_idx+1] = forces_z[point_idx]
+#     forces = np.vstack(forces)
+    print(forces)
+        
+    # -1<=slack_var<=0 used to convert inequalities to strict inequalities 
+    slack_var = mp.NewContinuousVariables(1,"slack_var")
+
+    # ensure forces/moments add to zero
+    for row_idx in range(np.shape(G)[0]):
+        # 3 rows (LMB_x, LMB_z, AMB) = 0 for static system
+        mp.AddLinearConstraint(G[row_idx,:].dot(forces) == 0)
+        
+    # ensure forces stay within friction cone and use slack to avoid trivial 0 solution
+    for point_idx in range(N_points):
+        # normal force must be positive (slack allows us to catch if it's zero)
+        mp.AddLinearConstraint(forces_z[point_idx] + slack_var[0] >= 0)
+        mp.AddLinearConstraint(forces_x[point_idx] <= mu*forces_z[point_idx] + slack_var[0])
+        mp.AddLinearConstraint(forces_x[point_idx] >= -(mu*forces_z[point_idx] + slack_var[0]))
+        
+    mp.AddLinearConstraint(slack_var[0] <= 0)
+    mp.AddLinearConstraint(slack_var[0] >= -1)
+    mp.AddLinearCost(slack_var[0])
+        
+    # restrict solution within bounds
+    for force_idx in range(2*N_points):
+        mp.AddLinearConstraint(forces[force_idx] >= -max_force)
+        mp.AddLinearConstraint(forces[force_idx] <= max_force)       
+        
+        
+    result = Solve(mp)
+    if (not result.is_success()):
+        print("solver failed to find solution")
+        return False
+    
+    gamma = result.GetSolution(slack_var)
+    if (gamma < 0):
+       print("acheived force closure, gamma = {}".format(gamma))
+       return True
+    else:
+       print("only trivial solution with 0 forces found")
+       return False
 
 def compute_convex_hull_volume(points):
     """
